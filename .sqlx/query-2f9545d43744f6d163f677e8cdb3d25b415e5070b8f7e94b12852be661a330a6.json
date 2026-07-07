@@ -1,0 +1,12 @@
+{
+  "db_name": "MySQL",
+  "query": "INSERT INTO task_notes (task_id, content) VALUES (?, ?)",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 2
+    },
+    "nullable": []
+  },
+  "hash": "2f9545d43744f6d163f677e8cdb3d25b415e5070b8f7e94b12852be661a330a6"
+}

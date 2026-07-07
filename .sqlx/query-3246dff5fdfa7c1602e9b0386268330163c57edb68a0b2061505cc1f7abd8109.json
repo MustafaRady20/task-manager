@@ -1,0 +1,12 @@
+{
+  "db_name": "MySQL",
+  "query": "\n            INSERT INTO tasks (title, status, priority, due_date)\n            VALUES (?, 'pending', ?, ?)\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": []
+  },
+  "hash": "3246dff5fdfa7c1602e9b0386268330163c57edb68a0b2061505cc1f7abd8109"
+}

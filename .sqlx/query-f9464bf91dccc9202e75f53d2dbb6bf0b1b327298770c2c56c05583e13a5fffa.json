@@ -1,0 +1,12 @@
+{
+  "db_name": "MySQL",
+  "query": "UPDATE tasks SET status = 'done' WHERE id = ?",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": []
+  },
+  "hash": "f9464bf91dccc9202e75f53d2dbb6bf0b1b327298770c2c56c05583e13a5fffa"
+}
