@@ -3,9 +3,17 @@ name = "core"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name = "task_core"
+path = "src/lib.rs"
+
 [dependencies]
 sqlx = { workspace = true }
 chrono = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
 serde = { workspace = true }
+tokio = { version = "1", features = ["full"] }
+
+[dev-dependencies]
+dotenvy = { workspace = true }

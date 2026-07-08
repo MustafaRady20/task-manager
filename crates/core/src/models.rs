@@ -1,5 +1,5 @@
 #[derive(Debug, Clone, Copy, PartialEq, Eq, sqlx::Type)]
-#[sqlx(type_name = "VARCHAR", rename_all = "lowercase")]
+#[sqlx(rename_all = "lowercase")]
 pub enum TaskStatus {
     Pending,
     Done,
