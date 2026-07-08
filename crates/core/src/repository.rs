@@ -91,7 +91,7 @@ impl TaskRepository {
         task_id: i64,
         new_date: chrono::NaiveDate,
     ) -> anyhow::Result<Option<Task>> {
-        sqlx::query(r#"UPDATE tasks SET due_date = ? WHERE id = ?"#)
+        sqlx::query(r#"UPDATE tasks SET due_date = ?, notified_at = NULL WHERE id = ?"#)
             .bind(new_date)
             .bind(task_id)
             .execute(&self.pool)
@@ -137,6 +137,36 @@ impl TaskRepository {
             .bind(task_id)
             .execute(&self.pool)
             .await?;
+        Ok(())
+    }
+
+    pub async fn find_unnotified_due(
+        &self,
+        now: chrono::NaiveDateTime,
+    ) -> anyhow::Result<Vec<Task>> {
+        let tasks = sqlx::query_as::<_, Task>(
+            r#"
+            SELECT * FROM tasks
+            WHERE status = 'pending'
+              AND notified_at IS NULL
+              AND TIMESTAMP(due_date, COALESCE(due_time, '00:00:00')) <= ?
+            "#,
+        )
+        .bind(now)
+        .fetch_all(&self.pool)
+        .await?;
+
+        Ok(tasks)
+    }
+
+    pub async fn mark_notified(&self, task_id: i64) -> anyhow::Result<()> {
+        sqlx::query!(
+            r#"UPDATE tasks SET notified_at = NOW() WHERE id = ?"#,
+            task_id
+        )
+        .execute(&self.pool)
+        .await?;
+
         Ok(())
     }
 }

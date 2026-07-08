@@ -14,3 +14,4 @@ sqlx = { workspace = true }
 chrono = { workspace = true }
 anyhow = { workspace = true }
 dotenvy = { workspace = true }
+notify-rust = "4"
